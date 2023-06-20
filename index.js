@@ -36,8 +36,17 @@ bot.on("text", async (msg) => {
         console.log("Launching Browser");
 
         const browser = await puppeteer.launch({
+            args: [
+                "--disable-setuid-sandbox",
+                "--no-sandbox",
+                "--single-process",
+                "--no-zygote",
+            ],
             headless: "new",
             defaultViewport: null,
+            executablePath: process.env.NODE_ENV
+                ? process.env.PUPPETEER_EXECUTABLE_PATH
+                : puppeteer.executablePath(),
         });
         const page = await browser.newPage();
 
