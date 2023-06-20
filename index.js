@@ -1,12 +1,11 @@
 import TelegramBot from "node-telegram-bot-api";
 import dotenv from "dotenv";
-import { existsSync, promises as fsPromises } from "fs";
+import { promises as fsPromises } from "fs";
 import puppeteer from "puppeteer";
 import { v4 as uuid } from "uuid";
-import path from "path";
 
 dotenv.config();
-
+console.log("Started");
 let URL = null;
 let MESSAGE_ID = "";
 let uploading = false;
@@ -35,7 +34,7 @@ bot.on("text", async (msg) => {
         );
 
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: "new",
             defaultViewport: null,
         });
         const page = await browser.newPage();
@@ -113,7 +112,7 @@ bot.on("text", async (msg) => {
         uploading = true;
 
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: "new",
             defaultViewport: null,
         });
         const page = await browser.newPage();
@@ -258,21 +257,5 @@ bot.on("callback_query", (callbackQuery) => {
 });
 
 process.on("uncaughtException", async (err) => {
-    try {
-        if (!existsSync(path.join(__dirname, "logs"))) {
-            await fsPromises.mkdir(path.join(__dirname, "logs"));
-        }
-        const date = new Date();
-        const today = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getMinutes()} : ${date.getSeconds()} : ${date.getMilliseconds()} `;
-        const errMsg = `${today}\t${err.name}\t${err.message}`;
-
-        await fsPromises.appendFile(
-            path(__dirname, "logs", "errLogs.txt"),
-            errMsg
-        );
-    } catch (error) {
-        console.log(error);
-    }
-
     process.exit(1);
 });

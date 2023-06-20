@@ -1,11 +1,11 @@
 {
-  "name": "telegram-bot-1",
+  "name": "url-2-img-bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index"
+    "start": "node index"
   },
   "keywords": [],
   "author": "",
