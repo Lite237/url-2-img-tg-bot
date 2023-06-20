@@ -44,9 +44,6 @@ bot.on("text", async (msg) => {
             ],
             headless: "new",
             defaultViewport: null,
-            executablePath: process.env.NODE_ENV
-                ? process.env.PUPPETEER_EXECUTABLE_PATH
-                : puppeteer.executablePath(),
         });
         const page = await browser.newPage();
 
