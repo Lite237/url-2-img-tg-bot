@@ -33,6 +33,8 @@ bot.on("text", async (msg) => {
             "Taking Screenshot😏"
         );
 
+        console.log("Launching Browser");
+
         const browser = await puppeteer.launch({
             headless: "new",
             defaultViewport: null,
@@ -257,5 +259,6 @@ bot.on("callback_query", (callbackQuery) => {
 });
 
 process.on("uncaughtException", async (err) => {
+    console.log(err.message);
     process.exit(1);
 });
