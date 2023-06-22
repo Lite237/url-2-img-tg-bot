@@ -33,15 +33,7 @@ bot.on("text", async (msg) => {
             "Taking Screenshot😏"
         );
 
-        console.log("Launching Browser");
-
         const browser = await puppeteer.launch({
-            args: [
-                "--disable-setuid-sandbox",
-                "--no-sandbox",
-                "--single-process",
-                "--no-zygote",
-            ],
             headless: "new",
             defaultViewport: null,
         });
